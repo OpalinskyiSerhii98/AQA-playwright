@@ -120,13 +120,13 @@ test.describe("Validation", ()=>{
     })
 })
 
-test.describe("Validation", ()=> {
+test.describe("Sign Up", ()=> {
     test.beforeEach(async ({page}) => {
         await page.goto("https://qauto.forstudy.space/")
         await page.click('text="Sign up"')
     })
 
-    test("Sign Up", async ({page})=>{
+    test("Registration", async ({page})=>{
         const inputNameString ="Serhii"
         const inputLastNameString ="Opalinskyi"
         const inputEmailString ="aqa-sopalinskyi@test.com"
