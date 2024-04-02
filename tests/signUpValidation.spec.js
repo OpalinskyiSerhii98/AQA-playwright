@@ -1,123 +1,188 @@
 import {test, expect} from "@playwright/test";
 
-test.describe("Validation", ()=>{
+test.describe("Sign Up Form Validation", ()=>{
     test.beforeEach(async ({page})=>{
         await page.goto("https://qauto.forstudy.space/")
         await page.click('text="Sign up"')
     })
 
-    test("Name", async ({page})=>{
-        const inputNameString ="Serhii"
+    test.describe("Name Validation", ()=> {
+        test("Name is required", async ({page}) => {
 
-        const popup = page.locator('app-signup-modal')
-        const nameInput = popup.locator('#signupName')
-        const nameErrorMessage =  popup.locator('p', {hasText: 'Name required'})
-        const nameErrorMessage2 =  popup.locator('p', {hasText: 'Name is invalid'})
-        const nameErrorMessage3 =  popup.locator('p', {hasText: 'Name has to be from 2 to 20 characters long'})
+            const popup = page.locator('app-signup-modal')
+            const nameInput = popup.locator('#signupName')
+            //const nameRequiredErrorMessage = popup.locator('p', {hasText: 'Name required'})
+            const nameRequiredErrorMessage = popup.locator('p')
 
-        await nameInput.focus()
-        await nameInput.blur()
-        await expect(nameErrorMessage).toBeVisible()
-        await nameInput.fill("Сергій")
-        await nameInput.blur()
-        await expect(nameErrorMessage2).toBeVisible()
-        await nameInput.fill("asdkleqomroqlfkrpsmrs")
-        await nameInput.blur()
-        await expect(nameErrorMessage3).toBeVisible()
+            await nameInput.focus()
+            await nameInput.blur()
+            await expect(nameRequiredErrorMessage).toHaveText('Name required')
+            //await expect(nameRequiredErrorMessage).toBeVisible()
+        })
+        test("Name is invalid", async ({page}) => {
+            const invalidInputNameString = "Сергій"
 
-        await nameInput.fill("a")
-        await nameInput.blur()
-        await expect(nameErrorMessage3).toBeVisible()
+            const popup = page.locator('app-signup-modal')
+            const nameInput = popup.locator('#signupName')
+            //const nameInvalidErrorMessage = popup.locator('p', {hasText: 'Name is invalid'})
+            const nameInvalidErrorMessage = popup.locator('p')
 
-        await nameInput.fill(inputNameString)
+            await nameInput.fill(invalidInputNameString)
+            await nameInput.blur()
+            await expect(nameInvalidErrorMessage).toHaveText('Name is invalid')
+            //await expect(nameInvalidErrorMessage).toBeVisible()
+        })
+        test("Name length", async ({page}) => {
+            const tooLongName = "asdkleqomroqlfkrpsmrs"
+            const tooShortName = "a"
 
-        await expect(nameInput).toHaveValue(inputNameString)
+            const popup = page.locator('app-signup-modal')
+            const nameInput = popup.locator('#signupName')
+            //const nameLengthErrorMessage = popup.locator('p', {hasText: 'Name has to be from 2 to 20 characters long'})
+            const nameLengthErrorMessage = popup.locator('p')
+
+            await nameInput.fill(tooLongName)
+            await nameInput.blur()
+            await expect(nameLengthErrorMessage).toHaveText('Name has to be from 2 to 20 characters long')
+            //await expect(nameLengthErrorMessage).toBeVisible()
+
+            await nameInput.fill(tooShortName)
+            await nameInput.blur()
+            await expect(nameLengthErrorMessage).toHaveText('Name has to be from 2 to 20 characters long')
+            //await expect(nameLengthErrorMessage).toBeVisible()
+        })
+    })
+    test.describe("Last Name Validation", ()=> {
+        test("Last Name is required", async ({page}) => {
+
+            const popup = page.locator('app-signup-modal')
+            const lastNameInput = popup.locator('#signupLastName')
+            //const lastNameErrorMessage =  popup.locator('p', {hasText: 'Last name required'})
+            const lastNameRequiredErrorMessage = popup.locator('p')
+
+            await lastNameInput.focus()
+            await lastNameInput.blur()
+            await expect(lastNameRequiredErrorMessage).toHaveText('Last name required')
+            //await expect(lastNameRequiredErrorMessage).toBeVisible()
+        })
+        test("Last Name is invalid", async ({page}) => {
+            const invalidInputLNameString = "Опалінський"
+
+            const popup = page.locator('app-signup-modal')
+            const lastNameInput = popup.locator('#signupLastName')
+            //const lastNameInvalidErrorMessage =  popup.locator('p', {hasText: 'Last name is invalid'})
+            const lastNameInvalidErrorMessage = popup.locator('p')
+
+            await lastNameInput.fill(invalidInputLNameString)
+            await lastNameInput.blur()
+            await expect(lastNameInvalidErrorMessage).toHaveText('Last name is invalid')
+            //await expect(lastNameInvalidErrorMessage).toBeVisible()
+        })
+        test("Last Name length", async ({page}) => {
+            const tooLongLName = "asdkleqomroqlfkrpsmrs"
+            const tooShortLName = "a"
+
+            const popup = page.locator('app-signup-modal')
+            const lastNameInput = popup.locator('#signupLastName')
+            //const lastNameLengthErrorMessage =  popup.locator('p', {hasText: 'Last name has to be from 2 to 20 characters long'})
+            const lastNameLengthErrorMessage = popup.locator('p')
+
+            await lastNameInput.fill(tooLongLName)
+            await lastNameInput.blur()
+            await expect(lastNameLengthErrorMessage).toHaveText('Last name has to be from 2 to 20 characters long')
+            //await expect(lastNameLengthErrorMessage).toBeVisible()
+
+            await lastNameInput.fill(tooShortLName)
+            await lastNameInput.blur()
+            await expect(lastNameLengthErrorMessage).toHaveText('Last name has to be from 2 to 20 characters long')
+            //await expect(lastNameLengthErrorMessage).toBeVisible()
+        })
+    })
+    test.describe("Email Validation", ()=> {
+        test("Email is required", async ({page})=>{
+            const popup = page.locator('app-signup-modal')
+            const emailInput = popup.locator('#signupEmail')
+            //const emailRequiredErrorMessage =  popup.locator('p', {hasText: 'Email required'})
+            const emailRequiredErrorMessage =  popup.locator('p')
+
+            await emailInput.focus()
+            await emailInput.blur()
+            await expect(emailRequiredErrorMessage).toHaveText('Email required')
+            //await expect(emailRequiredErrorMessage).toBeVisible()
+        })
+        test("Email is incorrect", async ({page})=>{
+            const incorrectEmail = "value"
+
+            const popup = page.locator('app-signup-modal')
+            const emailInput = popup.locator('#signupEmail')
+            //const emailIncorrectErrorMessage =  popup.locator('p', {hasText: 'Email is incorrect'})
+            const emailIncorrectErrorMessage =  popup.locator('p')
+
+            await emailInput.fill(incorrectEmail)
+            await emailInput.blur()
+            await expect(emailIncorrectErrorMessage).toHaveText('Email is incorrect')
+            //await expect(emailIncorrectErrorMessage).toBeVisible()
+        })
+    })
+    test.describe("Password Validation", ()=> {
+        test("Password is required", async ({page})=>{
+            const popup = page.locator('app-signup-modal')
+            const passwordInput = popup.locator('#signupPassword')
+            //const passwordRequiredErrorMessage =  popup.locator('p', {hasText: 'Password required'})
+            const passwordRequiredErrorMessage = popup.locator('p')
+
+            await passwordInput.focus()
+            await passwordInput.blur()
+            await expect(passwordRequiredErrorMessage).toHaveText('Password required')
+            //await expect(passwordRequiredErrorMessage).toBeVisible()
+        })
+        test("Password format", async ({page})=>{
+            const incorrectPassword = "1"
+
+            const popup = page.locator('app-signup-modal')
+            const passwordInput = popup.locator('#signupPassword')
+            //const passwordLengthErrorMessage =  popup.locator('p', {hasText: 'Password required'})
+            const passwordFormatErrorMessage = popup.locator('p')
+
+            await passwordInput.fill(incorrectPassword)
+            await passwordInput.blur()
+            await expect(passwordFormatErrorMessage).toHaveText('Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter')
+            //await expect(passwordFormatErrorMessage).toBeVisible()
+        })
     })
 
-    test("LastName", async ({page})=>{
-        const inputLastNameString ="Opalinskyi"
+    test.describe("Re-Password Validation", ()=> {
+        test("Re-Password is required", async ({page})=>{
+            const popup = page.locator('app-signup-modal')
+            const rePasswordInput = popup.locator('#signupRepeatPassword')
+            //const rePasswordRequiredErrorMessage =  popup.locator('p', {hasText: 'Re-enter password required'})
+            const rePasswordRequiredErrorMessage = popup.locator('p')
 
-        const popup = page.locator('app-signup-modal')
-        const lastNameInput = popup.locator('#signupLastName')
-        const lastNameErrorMessage =  popup.locator('p', {hasText: 'Last name required'})
-        const lastNameErrorMessage2 =  popup.locator('p', {hasText: 'Last name is invalid'})
-        const lastNameErrorMessage3 =  popup.locator('p', {hasText: 'Last name has to be from 2 to 20 characters long'})
+            await rePasswordInput.focus()
+            await rePasswordInput.blur()
+            await expect(rePasswordRequiredErrorMessage).toHaveText('Re-enter password required')
+            //await expect(rePasswordRequiredErrorMessage).toBeVisible()
+        })
+        test("Re-Password match", async ({page})=>{
+            const inputPasswordString ="qwertY1234"
+            const incorrectRePassword = "qwertY123"
 
-        await lastNameInput.focus()
-        await lastNameInput.blur()
-        await expect(lastNameErrorMessage).toBeVisible()
-        await lastNameInput.fill("Опалінський")
-        await lastNameInput.blur()
-        await expect(lastNameErrorMessage2).toBeVisible()
-        await lastNameInput.fill("asdkleqomroqlfkrpsmrs")
-        await lastNameInput.blur()
-        await expect(lastNameErrorMessage3).toBeVisible()
+            const popup = page.locator('app-signup-modal')
+            const passwordInput = popup.locator('#signupPassword')
+            const rePasswordInput = popup.locator('#signupRepeatPassword')
+            //const passwordMatchErrorMessage =  popup.locator('p', {hasText: 'Passwords do not match'})
+            const passwordMatchErrorMessage = popup.locator('p')
 
-        await lastNameInput.fill("a")
-        await lastNameInput.blur()
-        await expect(lastNameErrorMessage3).toBeVisible()
+            await passwordInput.fill(inputPasswordString)
+            await expect(passwordInput).toHaveValue(inputPasswordString)
 
-        await lastNameInput.fill(inputLastNameString)
-
-        await expect(lastNameInput).toHaveValue(inputLastNameString)
+            await rePasswordInput.fill(incorrectRePassword)
+            await rePasswordInput.blur()
+            await expect(passwordMatchErrorMessage).toHaveText('Passwords do not match')
+            //await expect(passwordMatchErrorMessage).toBeVisible()
+        })
     })
 
-    test("Email", async ({page})=>{
-        const inputEmailString ="aqa-sopalinskyi@test.com"
-
-        const popup = page.locator('app-signup-modal')
-        const emailInput = popup.locator('#signupEmail')
-        const emailErrorMessage =  popup.locator('p', {hasText: 'Email required'})
-        const emailErrorMessage2 =  popup.locator('p', {hasText: 'Email is incorrect'});
-
-        await emailInput.focus()
-        await emailInput.blur()
-        await expect(emailErrorMessage).toBeVisible()
-        await emailInput.fill("value")
-        await emailInput.blur()
-        await expect(emailErrorMessage2).toBeVisible()
-        await emailInput.fill(inputEmailString)
-
-        await expect(emailInput).toHaveValue(inputEmailString)
-    })
-
-    test("Password", async ({page})=>{
-        const inputPasswordString ="qwertY1234"
-
-        const popup = page.locator('app-signup-modal')
-        const passwordInput = popup.locator('#signupPassword')
-        const passwordErrorMessage =  popup.locator('p', {hasText: 'Password required'})
-        const passwordErrorMessage2 =  popup.locator('p', {hasText: 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter'});
-
-        await passwordInput.focus()
-        await passwordInput.blur()
-        await expect(passwordErrorMessage).toBeVisible()
-        await passwordInput.fill("1")
-        await passwordInput.blur()
-        await expect(passwordErrorMessage2).toBeVisible()
-        await passwordInput.fill(inputPasswordString)
-
-        await expect(passwordInput).toHaveValue(inputPasswordString)
-    })
-
-    test("Re-enter password", async ({page})=>{
-        const inputRePasswordString ="qwertY1234"
-
-        const popup = page.locator('app-signup-modal')
-        const rePasswordInput = popup.locator('#signupRepeatPassword')
-        const rePasswordErrorMessage =  popup.locator('p', {hasText: 'Re-enter password required'})
-        const rePasswordErrorMessage2 =  popup.locator('p', {hasText: 'Passwords do not match'});
-
-        await rePasswordInput.focus()
-        await rePasswordInput.blur()
-        await expect(rePasswordErrorMessage).toBeVisible()
-        await rePasswordInput.fill("qwertY123")
-        await rePasswordInput.blur()
-        await expect(rePasswordErrorMessage2).toBeVisible()
-        await rePasswordInput.fill(inputRePasswordString)
-
-        await expect(rePasswordInput).toHaveValue(inputRePasswordString)
-    })
 })
 
 test.describe("Sign Up", ()=> {
@@ -153,5 +218,6 @@ test.describe("Sign Up", ()=> {
         await expect(rePasswordInput).toHaveValue(inputRePasswordString)
 
         await popup.locator('text="Register"').click()
+        await expect(page).toHaveURL('https://qauto.forstudy.space/panel/garage')
     })
 })
