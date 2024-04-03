@@ -11,26 +11,24 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            //const nameRequiredErrorMessage = popup.locator('p', {hasText: 'Name required'})
-            const nameRequiredErrorMessage = popup.locator('p')
+            const nameRequiredErrorMessage = popup.locator('.invalid-feedback')
 
             await nameInput.focus()
             await nameInput.blur()
+            await expect(nameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(nameRequiredErrorMessage).toHaveText('Name required')
-            //await expect(nameRequiredErrorMessage).toBeVisible()
         })
         test("Name is invalid", async ({page}) => {
             const invalidInputNameString = "Сергій"
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            //const nameInvalidErrorMessage = popup.locator('p', {hasText: 'Name is invalid'})
-            const nameInvalidErrorMessage = popup.locator('p')
+            const nameInvalidErrorMessage = popup.locator('.invalid-feedback')
 
             await nameInput.fill(invalidInputNameString)
             await nameInput.blur()
+            await expect(nameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(nameInvalidErrorMessage).toHaveText('Name is invalid')
-            //await expect(nameInvalidErrorMessage).toBeVisible()
         })
         test("Name length", async ({page}) => {
             const tooLongName = "asdkleqomroqlfkrpsmrs"
@@ -38,18 +36,17 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            //const nameLengthErrorMessage = popup.locator('p', {hasText: 'Name has to be from 2 to 20 characters long'})
-            const nameLengthErrorMessage = popup.locator('p')
+            const nameLengthErrorMessage = popup.locator('.invalid-feedback')
 
             await nameInput.fill(tooLongName)
             await nameInput.blur()
+            await expect(nameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(nameLengthErrorMessage).toHaveText('Name has to be from 2 to 20 characters long')
-            //await expect(nameLengthErrorMessage).toBeVisible()
 
             await nameInput.fill(tooShortName)
             await nameInput.blur()
+            await expect(nameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(nameLengthErrorMessage).toHaveText('Name has to be from 2 to 20 characters long')
-            //await expect(nameLengthErrorMessage).toBeVisible()
         })
     })
     test.describe("Last Name Validation", ()=> {
@@ -57,26 +54,24 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            //const lastNameErrorMessage =  popup.locator('p', {hasText: 'Last name required'})
-            const lastNameRequiredErrorMessage = popup.locator('p')
+            const lastNameRequiredErrorMessage = popup.locator('.invalid-feedback')
 
             await lastNameInput.focus()
             await lastNameInput.blur()
+            await expect(lastNameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(lastNameRequiredErrorMessage).toHaveText('Last name required')
-            //await expect(lastNameRequiredErrorMessage).toBeVisible()
         })
         test("Last Name is invalid", async ({page}) => {
             const invalidInputLNameString = "Опалінський"
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            //const lastNameInvalidErrorMessage =  popup.locator('p', {hasText: 'Last name is invalid'})
-            const lastNameInvalidErrorMessage = popup.locator('p')
+            const lastNameInvalidErrorMessage = popup.locator('.invalid-feedback')
 
             await lastNameInput.fill(invalidInputLNameString)
             await lastNameInput.blur()
+            await expect(lastNameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(lastNameInvalidErrorMessage).toHaveText('Last name is invalid')
-            //await expect(lastNameInvalidErrorMessage).toBeVisible()
         })
         test("Last Name length", async ({page}) => {
             const tooLongLName = "asdkleqomroqlfkrpsmrs"
@@ -84,70 +79,65 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            //const lastNameLengthErrorMessage =  popup.locator('p', {hasText: 'Last name has to be from 2 to 20 characters long'})
-            const lastNameLengthErrorMessage = popup.locator('p')
+            const lastNameLengthErrorMessage = popup.locator('.invalid-feedback')
 
             await lastNameInput.fill(tooLongLName)
             await lastNameInput.blur()
+            await expect(lastNameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(lastNameLengthErrorMessage).toHaveText('Last name has to be from 2 to 20 characters long')
-            //await expect(lastNameLengthErrorMessage).toBeVisible()
 
             await lastNameInput.fill(tooShortLName)
             await lastNameInput.blur()
+            await expect(lastNameInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(lastNameLengthErrorMessage).toHaveText('Last name has to be from 2 to 20 characters long')
-            //await expect(lastNameLengthErrorMessage).toBeVisible()
         })
     })
     test.describe("Email Validation", ()=> {
         test("Email is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const emailInput = popup.locator('#signupEmail')
-            //const emailRequiredErrorMessage =  popup.locator('p', {hasText: 'Email required'})
-            const emailRequiredErrorMessage =  popup.locator('p')
+            const emailRequiredErrorMessage =  popup.locator('.invalid-feedback')
 
             await emailInput.focus()
             await emailInput.blur()
+            await expect(emailInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(emailRequiredErrorMessage).toHaveText('Email required')
-            //await expect(emailRequiredErrorMessage).toBeVisible()
         })
         test("Email is incorrect", async ({page})=>{
             const incorrectEmail = "value"
 
             const popup = page.locator('app-signup-modal')
             const emailInput = popup.locator('#signupEmail')
-            //const emailIncorrectErrorMessage =  popup.locator('p', {hasText: 'Email is incorrect'})
-            const emailIncorrectErrorMessage =  popup.locator('p')
+            const emailIncorrectErrorMessage =  popup.locator('.invalid-feedback')
 
             await emailInput.fill(incorrectEmail)
             await emailInput.blur()
+            await expect(emailInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(emailIncorrectErrorMessage).toHaveText('Email is incorrect')
-            //await expect(emailIncorrectErrorMessage).toBeVisible()
         })
     })
     test.describe("Password Validation", ()=> {
         test("Password is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
-            //const passwordRequiredErrorMessage =  popup.locator('p', {hasText: 'Password required'})
-            const passwordRequiredErrorMessage = popup.locator('p')
+            const passwordRequiredErrorMessage = popup.locator('.invalid-feedback')
 
             await passwordInput.focus()
             await passwordInput.blur()
+            await expect(passwordInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(passwordRequiredErrorMessage).toHaveText('Password required')
-            //await expect(passwordRequiredErrorMessage).toBeVisible()
         })
         test("Password format", async ({page})=>{
             const incorrectPassword = "1"
 
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
-            //const passwordLengthErrorMessage =  popup.locator('p', {hasText: 'Password required'})
-            const passwordFormatErrorMessage = popup.locator('p')
+            const passwordFormatErrorMessage = popup.locator('.invalid-feedback')
 
             await passwordInput.fill(incorrectPassword)
             await passwordInput.blur()
+            await expect(passwordInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(passwordFormatErrorMessage).toHaveText('Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter')
-            //await expect(passwordFormatErrorMessage).toBeVisible()
         })
     })
 
@@ -155,13 +145,12 @@ test.describe("Sign Up Form Validation", ()=>{
         test("Re-Password is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const rePasswordInput = popup.locator('#signupRepeatPassword')
-            //const rePasswordRequiredErrorMessage =  popup.locator('p', {hasText: 'Re-enter password required'})
-            const rePasswordRequiredErrorMessage = popup.locator('p')
+            const rePasswordRequiredErrorMessage = popup.locator('.invalid-feedback')
 
             await rePasswordInput.focus()
             await rePasswordInput.blur()
+            await expect(rePasswordInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(rePasswordRequiredErrorMessage).toHaveText('Re-enter password required')
-            //await expect(rePasswordRequiredErrorMessage).toBeVisible()
         })
         test("Re-Password match", async ({page})=>{
             const inputPasswordString ="qwertY1234"
@@ -170,16 +159,15 @@ test.describe("Sign Up Form Validation", ()=>{
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
             const rePasswordInput = popup.locator('#signupRepeatPassword')
-            //const passwordMatchErrorMessage =  popup.locator('p', {hasText: 'Passwords do not match'})
-            const passwordMatchErrorMessage = popup.locator('p')
+            const passwordMatchErrorMessage = popup.locator('.invalid-feedback')
 
             await passwordInput.fill(inputPasswordString)
             await expect(passwordInput).toHaveValue(inputPasswordString)
 
             await rePasswordInput.fill(incorrectRePassword)
             await rePasswordInput.blur()
+            await expect(rePasswordInput).toHaveCSS('border-color', 'rgb(220, 53, 69)')
             await expect(passwordMatchErrorMessage).toHaveText('Passwords do not match')
-            //await expect(passwordMatchErrorMessage).toBeVisible()
         })
     })
 
