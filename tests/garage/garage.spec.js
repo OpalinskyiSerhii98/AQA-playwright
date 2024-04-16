@@ -1,7 +1,7 @@
 import {test, expect} from "../../src/fixtures/userGaragePage";
 
 
-test.describe.only('Garage', ()=>{
+test.describe('Garage', ()=>{
     test('create car', async ({garagePage, page})=>{
         await expect(garagePage.addCarButton).toBeVisible()
 
