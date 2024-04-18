@@ -1,5 +1,5 @@
 import {test, expect} from "@playwright/test";
-import {WelcomePage} from "../pageObjects/WelcomePage/WelcomePage";
+import {WelcomePage} from "../src/pageObjects/WelcomePage/WelcomePage";
 
 test.describe("Registration", ()=>{
     test.describe("Sign Up", ()=> {
