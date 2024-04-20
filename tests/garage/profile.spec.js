@@ -13,7 +13,8 @@ test.describe.only('Profile', ()=>{
         })
         await page.goto('/panel/profile')
 
-        const profileName = await page.$eval('.profile_name', (element) => element.textContent.trim());
-        expect(profileName).toBe('John Doe');
+        const profileName = await page.$eval('.profile_name', (element) => element.textContent.trim())
+        const name = "John Doe"
+        expect(profileName).toBe(name)
     })
 })
