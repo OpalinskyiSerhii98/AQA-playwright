@@ -2,7 +2,7 @@ import {test, expect} from "../../src/fixtures/userGaragePage";
 import {PROFILE_MOCK_RESPONSE} from "./fixtures/profile";
 
 
-test.describe.only('Profile', ()=>{
+test.describe('Profile', ()=>{
     test('open profile tab', async ({page})=>{
 
         await page.route('https://qauto.forstudy.space/api/users/profile', (route)=>{
@@ -13,8 +13,9 @@ test.describe.only('Profile', ()=>{
         })
         await page.goto('/panel/profile')
 
-        const profileName = await page.$eval('.profile_name', (element) => element.textContent.trim())
+        const profileName = page.locator('.profile_name')
         const name = "John Doe"
-        expect(profileName).toBe(name)
+
+        await expect(profileName).toHaveText(name)
     })
 })
