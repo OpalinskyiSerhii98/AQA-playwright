@@ -1,12 +1,25 @@
-import {expect as baseExpect, test as base} from "@playwright/test";
+import {expect as baseExpect, request as baseRequest, test as base} from "@playwright/test";
 import {WelcomePage} from "../pageObjects/WelcomePage/WelcomePage";
 import GaragePage from "../pageObjects/GaragePage/GaragePage";
 import {USER_SERHII_STATE_PATH} from "../constants";
+import APIClient from "../client/APICLient.js";
 
 export const test = base.extend({
     welcomePage: async ({page}, use)=> {
         const welcomePage = new WelcomePage(page)
         await use(welcomePage)
+    },
+    request: async ({}, use)=>{
+        const req = await request.newContext({
+            storageState: USER_SERHII_STATE_PATH
+        })
+        await use(req)
+
+        await req.dispose()
+    },
+    apiNewUser: async ({}, use)=>{
+        const client = await APIClient.authenticateWithNewUser('')
+        await use(client)
     },
     page: async ({browser}, use)=>{
         const ctx = await browser.newContext({
@@ -27,3 +40,5 @@ export const test = base.extend({
 })
 
 export const expect = baseExpect
+
+export const request = baseRequest
