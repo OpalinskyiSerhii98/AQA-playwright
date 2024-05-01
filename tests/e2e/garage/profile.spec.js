@@ -1,4 +1,4 @@
-import {test, expect} from "../../src/fixtures/userGaragePage";
+import {test, expect} from "../../../src/fixtures/userGaragePage";
 import {PROFILE_MOCK_RESPONSE} from "./fixtures/profile";
 
 
