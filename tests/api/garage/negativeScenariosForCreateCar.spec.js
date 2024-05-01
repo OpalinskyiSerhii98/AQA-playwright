@@ -4,7 +4,7 @@ import {BRANDS} from "../../../src/data/brands.js";
 import {USER_SERHII_STATE_PATH} from "../../../src/constants.js";
 
 
-test.describe.only("Cars API", ()=> {
+test.describe("Cars API", ()=> {
     test.describe("Create", () => {
 
         test("missing Brand", async ({request}) => {
