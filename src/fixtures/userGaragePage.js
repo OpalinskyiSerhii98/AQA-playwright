@@ -2,7 +2,7 @@ import {expect as baseExpect, request as baseRequest, test as base} from "@playw
 import {WelcomePage} from "../pageObjects/WelcomePage/WelcomePage";
 import GaragePage from "../pageObjects/GaragePage/GaragePage";
 import {USER_SERHII_STATE_PATH} from "../constants";
-import APIClient from "../client/APICLient.js";
+import APIClient from "../client/APIClient.js";
 
 export const test = base.extend({
     welcomePage: async ({page}, use)=> {
