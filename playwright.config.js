@@ -24,10 +24,17 @@ const config = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 3 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+      [
+        'html', {open: process.env.CI ? 'never' : 'on-failure'}
+      ],
+      [
+        process.env.CI ? 'github' : 'list'
+      ]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless: false,
+    headless: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: testConfig.baseUrl,
     httpCredentials: testConfig.httpCredentials,
@@ -45,12 +52,19 @@ const config = defineConfig({
       use: { ...devices['Desktop Chrome'] },
       testMatch: /tests\/setup\/.*\/*.setup.js/
     },
-
     {
-      name: 'chromium',
+      name: 'chromium UI tests',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: /tests\/e2e\/.*\/*.spec.js/,
+      dependencies: ['setup']
+    },
+    {
+      name: 'API tests',
+      testMatch: /tests\/api\/.*\/*.spec.js/,
       use: { ...devices['Desktop Chrome'] },
       dependencies: ['setup']
     },
+
     /*
     {
       name: 'firefox',

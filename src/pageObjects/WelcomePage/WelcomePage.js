@@ -1,5 +1,5 @@
-import {SignUpPopup} from "./components/SignUpPopup";
-import {SignInPopup} from "./components/SignInPopup.js";
+import {SignUpPopup} from "./components/SignUpPopup.js";
+import {SignInPopup} from "./components/SignInPopUp.js";
 import BasePage from "../BasePage.js";
 import GaragePage from "../GaragePage/GaragePage.js";
 
