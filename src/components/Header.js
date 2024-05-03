@@ -6,6 +6,5 @@ export default class Header extends BaseComponent {
         super(page, page.locator('header'));
         this.signInButton =  page.locator('button', {hasText: 'Sign In'})
         this.guestLoginButton = page.locator('.header-link.-guest')
-        this.signUpButton =  page.locator('button', {hasText: 'Sign Up'})
     }
 }
