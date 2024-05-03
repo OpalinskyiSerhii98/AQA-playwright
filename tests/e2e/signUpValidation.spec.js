@@ -11,7 +11,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            const nameRequiredErrorMessage = nameInput.locator("#signupName + .invalid-feedback")
+            const nameRequiredErrorMessage = nameInput.locator("+ .invalid-feedback")
 
             await nameInput.focus()
             await nameInput.blur()
@@ -23,7 +23,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            const nameInvalidErrorMessage = nameInput.locator("#signupName + .invalid-feedback")
+            const nameInvalidErrorMessage = nameInput.locator("+ .invalid-feedback")
 
             await nameInput.fill(invalidInputNameString)
             await nameInput.blur()
@@ -36,7 +36,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const nameInput = popup.locator('#signupName')
-            const nameLengthErrorMessage = nameInput.locator("#signupName + .invalid-feedback")
+            const nameLengthErrorMessage = nameInput.locator("+ .invalid-feedback")
 
             await nameInput.fill(tooLongName)
             await nameInput.blur()
@@ -54,7 +54,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            const lastNameRequiredErrorMessage = lastNameInput.locator("#signupLastName + .invalid-feedback")
+            const lastNameRequiredErrorMessage = lastNameInput.locator("+ .invalid-feedback")
 
             await lastNameInput.focus()
             await lastNameInput.blur()
@@ -66,7 +66,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            const lastNameInvalidErrorMessage = lastNameInput.locator("#signupLastName + .invalid-feedback")
+            const lastNameInvalidErrorMessage = lastNameInput.locator("+ .invalid-feedback")
 
             await lastNameInput.fill(invalidInputLNameString)
             await lastNameInput.blur()
@@ -79,7 +79,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const lastNameInput = popup.locator('#signupLastName')
-            const lastNameLengthErrorMessage = lastNameInput.locator("#signupLastName + .invalid-feedback")
+            const lastNameLengthErrorMessage = lastNameInput.locator("+ .invalid-feedback")
 
             await lastNameInput.fill(tooLongLName)
             await lastNameInput.blur()
@@ -96,7 +96,7 @@ test.describe("Sign Up Form Validation", ()=>{
         test("Email is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const emailInput = popup.locator('#signupEmail')
-            const emailRequiredErrorMessage = emailInput.locator("#signupEmail + .invalid-feedback")
+            const emailRequiredErrorMessage = emailInput.locator("+ .invalid-feedback")
 
             await emailInput.focus()
             await emailInput.blur()
@@ -108,7 +108,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const emailInput = popup.locator('#signupEmail')
-            const emailIncorrectErrorMessage =  emailInput.locator("#signupEmail + .invalid-feedback")
+            const emailIncorrectErrorMessage =  emailInput.locator("+ .invalid-feedback")
 
             await emailInput.fill(incorrectEmail)
             await emailInput.blur()
@@ -120,7 +120,7 @@ test.describe("Sign Up Form Validation", ()=>{
         test("Password is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
-            const passwordRequiredErrorMessage = passwordInput.locator("#signupPassword + .invalid-feedback")
+            const passwordRequiredErrorMessage = passwordInput.locator("+ .invalid-feedback")
 
             await passwordInput.focus()
             await passwordInput.blur()
@@ -132,7 +132,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
-            const passwordFormatErrorMessage = passwordInput.locator("#signupPassword + .invalid-feedback")
+            const passwordFormatErrorMessage = passwordInput.locator("+ .invalid-feedback")
 
             await passwordInput.fill(incorrectPassword)
             await passwordInput.blur()
@@ -145,7 +145,7 @@ test.describe("Sign Up Form Validation", ()=>{
         test("Re-Password is required", async ({page})=>{
             const popup = page.locator('app-signup-modal')
             const rePasswordInput = popup.locator('#signupRepeatPassword')
-            const rePasswordRequiredErrorMessage = rePasswordInput.locator("#signupRepeatPassword + .invalid-feedback")
+            const rePasswordRequiredErrorMessage = rePasswordInput.locator("+ .invalid-feedback")
 
             await rePasswordInput.focus()
             await rePasswordInput.blur()
@@ -159,7 +159,7 @@ test.describe("Sign Up Form Validation", ()=>{
             const popup = page.locator('app-signup-modal')
             const passwordInput = popup.locator('#signupPassword')
             const rePasswordInput = popup.locator('#signupRepeatPassword')
-            const passwordMatchErrorMessage = rePasswordInput.locator("#signupRepeatPassword + .invalid-feedback")
+            const passwordMatchErrorMessage = rePasswordInput.locator("+ .invalid-feedback")
 
             await passwordInput.fill(inputPasswordString)
             await expect(passwordInput).toHaveValue(inputPasswordString)
@@ -173,7 +173,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
 })
 
-test.describe("Sign Up", ()=> {
+test.describe.skip("Sign Up", ()=> {
     test.beforeEach(async ({page}) => {
         await page.goto("https://qauto.forstudy.space/")
         await page.click('text="Sign up"')

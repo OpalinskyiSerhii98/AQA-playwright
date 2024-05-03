@@ -1,4 +1,5 @@
 import Header from '../components/Header.js';
+import Section from "../components/Section";
 
 
 export default class BasePage {
@@ -6,6 +7,7 @@ export default class BasePage {
         this._page = page
         this._url = url
         this.header = new Header(page)
+        this.section = new Section(page)
     }
 
     get page (){

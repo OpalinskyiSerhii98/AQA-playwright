@@ -9,7 +9,7 @@ export class WelcomePage extends BasePage{
     }
 
     async clickSignUpBtnAndOpenPopup(){
-        await this.signUpButton.click()
+        await this.section.signUpButton.click()
         return new SignUpPopup(this._page)
     }
 

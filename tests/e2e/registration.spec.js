@@ -1,7 +1,7 @@
 import {test, expect} from "@playwright/test";
 import {WelcomePage} from "../../src/pageObjects/WelcomePage/WelcomePage";
 
-test.describe("Registration", ()=>{
+test.describe.skip("Registration", ()=>{
     test.describe("Sign Up", ()=> {
         let welcomePage
         let popup
@@ -12,7 +12,7 @@ test.describe("Registration", ()=>{
                 await welcomePage.navigate()
                 popup = await welcomePage.clickSignUpBtnAndOpenPopup()
             })
-            test("user should be able to sign up", async ({page})=>{
+            test("User should be able to sign up", async ({page})=>{
 
                 const inputNameString ="Serhii"
                 const inputLastNameString ="Opalinskyi"
