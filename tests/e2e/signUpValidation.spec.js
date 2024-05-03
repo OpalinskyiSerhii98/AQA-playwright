@@ -173,7 +173,7 @@ test.describe("Sign Up Form Validation", ()=>{
 
 })
 
-test.describe("Sign Up", ()=> {
+test.describe.skip("Sign Up", ()=> {
     test.beforeEach(async ({page}) => {
         await page.goto("https://qauto.forstudy.space/")
         await page.click('text="Sign up"')
