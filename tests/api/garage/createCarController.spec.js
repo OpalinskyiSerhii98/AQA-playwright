@@ -1,27 +1,19 @@
-import {test, expect, request as apiRequest} from "../../../src/fixtures/userGaragePage";
+import {test, expect} from "../../../src/fixtures/userGaragePage.js";
 import {MODELS} from "../../../src/data/models.js";
 import {BRANDS} from "../../../src/data/brands.js";
-import {USER_SERHII_STATE_PATH} from "../../../src/constants.js";
 import moment from "moment";
+import CarsController from "../../../src/controllers/CarsContoller.js";
 
 
 test.describe("Cars API", ()=>{
-    test.describe("Create", ()=>{
+    test.describe("Create with Controller", ()=>{
+        let carsController
 
-        test.afterAll(async ()=>{
-            const request = await apiRequest.newContext({
-                storageState: USER_SERHII_STATE_PATH
-            })
-
-            const carsResponse = await request.get('/api/cars')
-            const cars = await carsResponse.json()
-
-            await Promise.all(
-                cars.data.map((car) => request.delete(`/api/cars/${car.id}`))
-            )
+        test.beforeEach(async ({request})=>{
+            carsController = new CarsController(request)
         })
 
-        test("create Audi cars", async ({request})=>{
+        test("create Audi cars", async ()=>{
 
             const brand = BRANDS.Audi
 
@@ -35,9 +27,7 @@ test.describe("Cars API", ()=>{
                     }
                     const startTime = new Date()
 
-                    const response = await request.post('/api/cars', {
-                        data: requestBody
-                    })
+                    const response = await carsController.createCar(requestBody)
 
                     const body = await response.json()
                     const expected = {
@@ -61,7 +51,7 @@ test.describe("Cars API", ()=>{
                 })
             }
         })
-        test("create BMW cars", async ({request})=>{
+        test("create BMW cars", async ()=>{
 
             const brand = BRANDS.BMW
 
@@ -76,9 +66,7 @@ test.describe("Cars API", ()=>{
 
                     const startTime = new Date()
 
-                    const response = await request.post('/api/cars', {
-                        data: requestBody
-                    })
+                    const response = await carsController.createCar(requestBody)
 
                     const body = await response.json()
                     const expected = {
@@ -102,7 +90,7 @@ test.describe("Cars API", ()=>{
                 })
             }
         })
-        test("create Ford cars", async ({request})=>{
+        test("create Ford cars", async ()=>{
 
             const brand = BRANDS.Ford
 
@@ -117,9 +105,7 @@ test.describe("Cars API", ()=>{
 
                     const startTime = new Date()
 
-                    const response = await request.post('/api/cars', {
-                        data: requestBody
-                    })
+                    const response = await carsController.createCar(requestBody)
 
                     const body = await response.json()
                     const expected = {
@@ -143,7 +129,7 @@ test.describe("Cars API", ()=>{
                 })
             }
         })
-        test("create Porsche cars", async ({request})=>{
+        test("create Porsche cars", async ()=>{
 
             const brand = BRANDS.Porsche
 
@@ -158,9 +144,7 @@ test.describe("Cars API", ()=>{
 
                     const startTime = new Date()
 
-                    const response = await request.post('/api/cars', {
-                        data: requestBody
-                    })
+                    const response = await carsController.createCar(requestBody)
 
                     const body = await response.json()
                     const expected = {
@@ -184,7 +168,7 @@ test.describe("Cars API", ()=>{
                 })
             }
         })
-        test("create Fiat cars", async ({request})=>{
+        test("create Fiat cars", async ()=>{
 
             const brand = BRANDS.Fiat
 
@@ -199,9 +183,7 @@ test.describe("Cars API", ()=>{
 
                     const startTime = new Date()
 
-                    const response = await request.post('/api/cars', {
-                        data: requestBody
-                    })
+                    const response = await carsController.createCar(requestBody)
 
                     const body = await response.json()
                     const expected = {
