@@ -1,15 +1,22 @@
 import BaseController from "./BaseController.js";
 
 
-export default class CarController extends BaseController{
+export default class CarsController extends BaseController{
     #CREATE_CAR_PATH = '/api/cars'
-    #UPDATE_CAR_PATH = '/api/cars'
+    #UPDATE_CAR_PATH = '/api/cars/{id}'
     #GET_USER_CARS_PATH = '/api/cars'
     #DELETE_USER_CARS_PATH = '/api/cars/#'
 
+    constructor(request) {
+        super(request)
+    }
 
-    async createCar(data){
-        return this._request.post(this.#CREATE_CAR_PATH, {data})
+    async createCar(newCar){
+        return this._request.post(this.#CREATE_CAR_PATH, {data: newCar})
+    }
+
+    async updateCar(id, data) {
+        return this._request.put(this.#UPDATE_CAR_PATH.replace('{id}', id), {data})
     }
 
     async getUserCars(){
